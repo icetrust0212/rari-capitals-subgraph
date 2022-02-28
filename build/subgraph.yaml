@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: RariFundController
@@ -22,9 +22,10 @@ dataSources:
         - PoolAllocation
       abis:
         - name: RariFundController
-          file: ./abis/RariFundController.json
+          file: RariFundController\abis\RariFundController.json
       eventHandlers:
-        - event: CurrencyTrade(indexed string,indexed string,uint256,uint256,uint256,uint256,indexed uint8)
+        - event: CurrencyTrade(indexed string,indexed string,uint256,uint256,uint256,uint256,indexed
+            uint8)
           handler: handleCurrencyTrade
         - event: FundDisabled()
           handler: handleFundDisabled
@@ -38,8 +39,7 @@ dataSources:
           handler: handleOwnershipTransferred
         - event: PoolAllocation(indexed uint8,indexed uint8,indexed string,uint256)
           handler: handlePoolAllocation
-      file: ./src/mappings/RariFundController.ts
-
+      file: RariFundController\RariFundController.wasm
   - kind: ethereum/contract
     name: RariFundManager
     network: mainnet
@@ -65,8 +65,7 @@ dataSources:
         - Withdrawal
       abis:
         - name: RariFundManager
-          file: ./abis/RariFundManager.json
-
+          file: RariFundManager\abis\RariFundManager.json
       eventHandlers:
         - event: Deposit(indexed string,indexed address,indexed address,uint256,uint256,uint256)
           handler: handleDeposit
@@ -90,10 +89,10 @@ dataSources:
           handler: handleInterestFeeDeposit
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-        - event: Withdrawal(indexed string,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
+        - event: Withdrawal(indexed string,indexed address,indexed
+            address,uint256,uint256,uint256,uint256,uint256)
           handler: handleWithdrawal
-      file: ./src/mappings/RariFundManager.ts
-
+      file: RariFundManager\RariFundManager.wasm
   - kind: ethereum/contract
     name: RariFundToken
     network: mainnet
@@ -116,10 +115,9 @@ dataSources:
         - Unpaused
       abis:
         - name: RariFundToken
-          file: ./abis/RariFundToken.json
+          file: RariFundToken\abis\RariFundToken.json
         - name: ERC20Contract
-          file: ./node_modules/@openzeppelin/contracts/build/contracts/ERC20.json
-
+          file: RariFundToken\node_modules\@openzeppelin\contracts\build\contracts\ERC20.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
@@ -139,4 +137,4 @@ dataSources:
           handler: handleTransfer
         - event: Unpaused(address)
           handler: handleUnpaused
-      file: ./src/mappings/RariFundToken.ts
+      file: RariFundToken\RariFundToken.wasm
