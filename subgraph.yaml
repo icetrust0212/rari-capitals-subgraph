@@ -1,0 +1,41 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: RariFundController
+    network: mainnet
+    source:
+      address: "0x9245efB59f6491Ed1652c2DD8a4880cBFADc3ffA"
+      abi: RariFundController
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - CurrencyTrade
+        - FundDisabled
+        - FundEnabled
+        - FundManagerSet
+        - FundRebalancerSet
+        - OwnershipTransferred
+        - PoolAllocation
+      abis:
+        - name: RariFundController
+          file: ./abis/RariFundController.json
+      eventHandlers:
+        - event: CurrencyTrade(indexed string,indexed string,uint256,uint256,uint256,uint256,indexed uint8)
+          handler: handleCurrencyTrade
+        - event: FundDisabled()
+          handler: handleFundDisabled
+        - event: FundEnabled()
+          handler: handleFundEnabled
+        - event: FundManagerSet(address)
+          handler: handleFundManagerSet
+        - event: FundRebalancerSet(address)
+          handler: handleFundRebalancerSet
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PoolAllocation(indexed uint8,indexed uint8,indexed string,uint256)
+          handler: handlePoolAllocation
+      file: ./src/mapping.ts

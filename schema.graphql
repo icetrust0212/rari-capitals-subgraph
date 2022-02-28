@@ -1,0 +1,6 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  inputCurrencyCode: String! # string
+  outputCurrencyCode: String! # string
+}
